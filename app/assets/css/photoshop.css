@@ -1,0 +1,949 @@
+/* ========================================
+   Adobe Photoshop 1.0 - Classic Mac OS Theme
+   ======================================== */
+
+@font-face {
+  font-family: 'Chicago';
+  src: url('/fonts/ChicagoFLF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  /* Classic Mac OS Colors */
+  --mac-white: #ffffff;
+  --mac-light-gray: #dddddd;
+  --mac-gray: #c0c0c0;
+  --mac-medium-gray: #aaaaaa;
+  --mac-dark-gray: #808080;
+  --mac-darker-gray: #555555;
+  --mac-black: #000000;
+
+  /* UI Element Colors */
+  --mac-bg: #c0c0c0;
+  --mac-window-bg: #dddddd;
+  --mac-title-bar: #ffffff;
+  --mac-title-bar-inactive: #c0c0c0;
+  --mac-menu-bg: #ffffff;
+  --mac-menu-highlight: #000000;
+  --mac-menu-highlight-text: #ffffff;
+  --mac-border: #000000;
+  --mac-button-face: #dddddd;
+  --mac-button-highlight: #ffffff;
+  --mac-button-shadow: #808080;
+
+  /* Canvas */
+  --canvas-bg: #808080;
+
+  /* Font */
+  --mac-font: 'Chicago', 'Geneva', 'Helvetica', 'Arial', sans-serif;
+  --mac-font-size: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #__nuxt {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--mac-font);
+  font-size: var(--mac-font-size);
+  background: var(--mac-bg);
+  color: var(--mac-black);
+  cursor: default;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  user-select: none;
+}
+
+/* ========================================
+   Menu Bar
+   ======================================== */
+.menu-bar {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  background: var(--mac-menu-bg);
+  border-bottom: 1px solid var(--mac-black);
+  padding: 0 8px;
+  position: relative;
+  z-index: 1000;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.menu-bar-item {
+  padding: 0 12px;
+  height: 20px;
+  cursor: default;
+  position: relative;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.menu-bar-item:hover,
+.menu-bar-item.active {
+  background: var(--mac-menu-highlight);
+  color: var(--mac-menu-highlight-text);
+}
+
+.menu-dropdown {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  min-width: 200px;
+  background: var(--mac-menu-bg);
+  border: 1px solid var(--mac-black);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  padding: 2px 0;
+}
+
+.menu-item {
+  padding: 2px 20px 2px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: default;
+  white-space: nowrap;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+}
+
+.menu-item:hover:not(.menu-separator):not(.menu-disabled) {
+  background: var(--mac-menu-highlight);
+  color: var(--mac-menu-highlight-text);
+}
+
+.menu-item.menu-disabled {
+  color: var(--mac-dark-gray);
+}
+
+.menu-separator {
+  height: 1px;
+  margin: 2px 0;
+  padding: 0;
+  border: none;
+}
+
+.menu-separator::after {
+  content: '';
+  display: block;
+  height: 0;
+  border-top: 1px dashed var(--mac-dark-gray);
+  margin: 0 4px;
+}
+
+.menu-shortcut {
+  margin-left: 24px;
+  font-size: 11px;
+}
+
+.menu-submenu-arrow {
+  margin-left: 12px;
+}
+
+.menu-submenu {
+  position: absolute;
+  left: 100%;
+  top: -2px;
+  min-width: 180px;
+  background: var(--mac-menu-bg);
+  border: 1px solid var(--mac-black);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  padding: 2px 0;
+}
+
+/* ========================================
+   Toolbar (Tools Palette)
+   ======================================== */
+.toolbar {
+  position: absolute;
+  top: 28px;
+  left: 8px;
+  width: 56px;
+  background: var(--mac-window-bg);
+  border: 2px solid var(--mac-black);
+  z-index: 100;
+  cursor: default;
+}
+
+.toolbar-title {
+  height: 12px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.toolbar-title::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--mac-black) 0px,
+    var(--mac-black) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.toolbar-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.tool-button {
+  width: 26px;
+  height: 24px;
+  border: 1px solid var(--mac-dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  background: var(--mac-window-bg);
+  position: relative;
+  font-size: 14px;
+}
+
+.tool-button:hover {
+  background: var(--mac-light-gray);
+}
+
+.tool-button.active {
+  background: var(--mac-black);
+  color: var(--mac-white);
+  border-color: var(--mac-black);
+}
+
+.tool-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tool-button.active svg {
+  filter: invert(1);
+}
+
+/* Color swatches in toolbar */
+.color-swatches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  position: relative;
+  height: 36px;
+  border-top: 1px solid var(--mac-dark-gray);
+}
+
+.color-swatch {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--mac-black);
+  cursor: pointer;
+  position: absolute;
+}
+
+.color-swatch-fg {
+  top: 6px;
+  left: 12px;
+  z-index: 2;
+}
+
+.color-swatch-bg {
+  top: 14px;
+  left: 22px;
+  z-index: 1;
+}
+
+.color-swap {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 10px;
+  cursor: pointer;
+  color: var(--mac-black);
+  z-index: 3;
+}
+
+/* ========================================
+   Document Window / Canvas Area
+   ======================================== */
+.workspace {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--mac-bg);
+  overflow: hidden;
+}
+
+.document-window {
+  position: absolute;
+  top: 8px;
+  left: 72px;
+  right: 8px;
+  bottom: 8px;
+  background: var(--mac-window-bg);
+  border: 2px solid var(--mac-black);
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  min-height: 200px;
+}
+
+.document-title-bar {
+  height: 18px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.document-title-bar::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  right: 18px;
+  bottom: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--mac-black) 0px,
+    var(--mac-black) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 0;
+}
+
+.document-title-text {
+  position: relative;
+  z-index: 1;
+  background: var(--mac-white);
+  padding: 0 8px;
+}
+
+.document-close-box {
+  position: absolute;
+  left: 4px;
+  top: 3px;
+  width: 11px;
+  height: 11px;
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.document-close-box:active {
+  background: var(--mac-black);
+}
+
+/* Rulers */
+.document-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ruler-corner {
+  width: 16px;
+  height: 16px;
+  background: var(--mac-light-gray);
+  border-right: 1px solid var(--mac-dark-gray);
+  border-bottom: 1px solid var(--mac-dark-gray);
+  flex-shrink: 0;
+}
+
+.ruler-horizontal {
+  height: 16px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-dark-gray);
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.ruler-vertical {
+  width: 16px;
+  background: var(--mac-white);
+  border-right: 1px solid var(--mac-dark-gray);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ruler-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ruler-top-row {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.ruler-content-row {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Canvas container */
+.canvas-container {
+  flex: 1;
+  overflow: auto;
+  background: var(--canvas-bg);
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.canvas-wrapper {
+  position: relative;
+  background: var(--mac-white);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+  cursor: crosshair;
+}
+
+.canvas-wrapper canvas {
+  display: block;
+}
+
+/* Scrollbars */
+.scrollbar-h {
+  height: 16px;
+  background: var(--mac-light-gray);
+  border-top: 1px solid var(--mac-black);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.scrollbar-v {
+  width: 16px;
+  background: var(--mac-light-gray);
+  border-left: 1px solid var(--mac-black);
+  flex-shrink: 0;
+}
+
+/* Status bar at bottom */
+.status-bar {
+  height: 16px;
+  background: var(--mac-window-bg);
+  border-top: 1px solid var(--mac-dark-gray);
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Floating Palettes
+   ======================================== */
+.floating-palette {
+  position: absolute;
+  z-index: 200;
+  background: var(--mac-window-bg);
+  border: 2px solid var(--mac-black);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.palette-title {
+  height: 12px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: move;
+  position: relative;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.palette-title::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--mac-black) 0px,
+    var(--mac-black) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 0;
+}
+
+.palette-title-text {
+  position: relative;
+  z-index: 1;
+  background: var(--mac-white);
+  padding: 0 4px;
+}
+
+.palette-close {
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  z-index: 2;
+  cursor: pointer;
+  font-size: 7px;
+  line-height: 7px;
+  text-align: center;
+}
+
+/* ========================================
+   Brushes Palette
+   ======================================== */
+.brushes-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+  padding: 2px;
+}
+
+.brush-item {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.brush-item:hover {
+  background: var(--mac-light-gray);
+}
+
+.brush-item.active {
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+}
+
+.brush-dot {
+  border-radius: 50%;
+  background: var(--mac-black);
+}
+
+/* ========================================
+   Color Picker Palette
+   ======================================== */
+.color-picker-body {
+  padding: 4px;
+}
+
+.color-picker-spectrum {
+  width: 180px;
+  height: 180px;
+  border: 1px solid var(--mac-black);
+  cursor: crosshair;
+  position: relative;
+  margin-bottom: 4px;
+}
+
+.color-picker-hue-bar {
+  width: 180px;
+  height: 16px;
+  border: 1px solid var(--mac-black);
+  cursor: crosshair;
+  margin-bottom: 4px;
+}
+
+.color-picker-preview {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.color-preview-box {
+  width: 30px;
+  height: 24px;
+  border: 1px solid var(--mac-black);
+}
+
+.color-picker-inputs {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 4px;
+  font-size: 10px;
+}
+
+.color-picker-inputs label {
+  text-align: right;
+}
+
+.color-picker-inputs input {
+  width: 40px;
+  height: 14px;
+  font-size: 10px;
+  font-family: var(--mac-font);
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  padding: 0 2px;
+}
+
+/* ========================================
+   Dialogs (Modal)
+   ======================================== */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialog-window {
+  background: var(--mac-window-bg);
+  border: 2px solid var(--mac-black);
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+  padding: 0;
+  min-width: 300px;
+}
+
+.dialog-title-bar {
+  height: 18px;
+  background: var(--mac-white);
+  border-bottom: 1px solid var(--mac-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  position: relative;
+}
+
+.dialog-title-bar::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  right: 18px;
+  bottom: 2px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--mac-black) 0px,
+    var(--mac-black) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 0;
+}
+
+.dialog-title-text {
+  position: relative;
+  z-index: 1;
+  background: var(--mac-white);
+  padding: 0 8px;
+}
+
+.dialog-body {
+  padding: 12px 16px;
+}
+
+.dialog-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.dialog-label {
+  font-size: 12px;
+  min-width: 70px;
+  text-align: right;
+}
+
+.dialog-input {
+  height: 18px;
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  padding: 0 4px;
+  font-family: var(--mac-font);
+  font-size: 12px;
+  width: 80px;
+}
+
+.dialog-select {
+  height: 18px;
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  font-family: var(--mac-font);
+  font-size: 12px;
+  padding: 0 4px;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.dialog-button {
+  height: 20px;
+  min-width: 60px;
+  border: 2px solid var(--mac-black);
+  background: var(--mac-button-face);
+  font-family: var(--mac-font);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0 12px;
+  border-radius: 4px;
+}
+
+.dialog-button:active {
+  background: var(--mac-black);
+  color: var(--mac-white);
+}
+
+.dialog-button-primary {
+  border: 3px solid var(--mac-black);
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.dialog-button-primary:active {
+  background: var(--mac-black);
+  color: var(--mac-white);
+}
+
+/* Radio buttons */
+.dialog-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dialog-radio {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dialog-radio input[type="radio"] {
+  cursor: pointer;
+}
+
+/* Checkbox */
+.dialog-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* ========================================
+   Marching Ants Selection
+   ======================================== */
+@keyframes marching-ants {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -16; }
+}
+
+.selection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.selection-path {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  animation: marching-ants 0.4s linear infinite;
+}
+
+/* ========================================
+   Zoom indicator
+   ======================================== */
+.zoom-indicator {
+  position: absolute;
+  bottom: 2px;
+  left: 4px;
+  font-size: 9px;
+  color: var(--mac-darker-gray);
+}
+
+/* ========================================
+   About dialog
+   ======================================== */
+.about-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.about-content h2 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.about-content p {
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+/* ========================================
+   Histogram
+   ======================================== */
+.histogram-canvas {
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+}
+
+.histogram-stats {
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+/* ========================================
+   Image Adjustments
+   ======================================== */
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.slider-label {
+  font-size: 11px;
+  min-width: 80px;
+  text-align: right;
+}
+
+.slider-value {
+  font-size: 11px;
+  min-width: 30px;
+  text-align: right;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: var(--mac-dark-gray);
+  border: 1px solid var(--mac-black);
+  outline: none;
+  flex: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 14px;
+  background: var(--mac-button-face);
+  border: 1px solid var(--mac-black);
+  cursor: pointer;
+}
+
+/* ========================================
+   Text Tool Dialog
+   ======================================== */
+.text-preview {
+  width: 100%;
+  min-height: 60px;
+  border: 1px solid var(--mac-black);
+  background: var(--mac-white);
+  padding: 4px;
+  font-size: 14px;
+  resize: none;
+  font-family: var(--mac-font);
+}
+
+/* ========================================
+   Checkerboard for transparency
+   ======================================== */
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #999 25%, transparent 25%),
+    linear-gradient(-45deg, #999 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #999 75%),
+    linear-gradient(-45deg, transparent 75%, #999 75%);
+  background-size: 8px 8px;
+  background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+  background-color: #ccc;
+}
+
+/* Scrollbar styling */
+.canvas-container::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+.canvas-container::-webkit-scrollbar-track {
+  background: var(--mac-light-gray);
+  border: 1px solid var(--mac-dark-gray);
+}
+
+.canvas-container::-webkit-scrollbar-thumb {
+  background: var(--mac-gray);
+  border: 1px solid var(--mac-black);
+}
+
+.canvas-container::-webkit-scrollbar-corner {
+  background: var(--mac-light-gray);
+}
+
+/* ========================================
+   Levels dialog
+   ======================================== */
+.levels-histogram {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.levels-inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.levels-arrow {
+  font-size: 14px;
+}
